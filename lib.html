@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Virtual Library</title>
+    <meta name="description" content="Hello, World! • A-Frame">
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <!--
+    <script src="node_modules/aframe/dist/aframe-master.js"></script>
+    -->
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>
+        <a-asset-item id="book" src="assets/book1.dae"></a-asset-item>
+        <img id="page1" src="img/1.jpg">
+        <img id="page2" src="img/2.jpg">
+        <img id="page3" src="img/3.jpg">
+      </a-assets>
+
+      <a-image id="page-view" src="#page1" width="4" height="5" position="0 1 0"></a-image>
+
+      <a-box id="left" position="-2 1 0" rotation="0 45 0" width="1" height="5" depth="1"  color="#4CC3D9"></a-box>
+      <a-box id="right" position="2 1 0" rotation="0 45 0" width="1" height="5" depth="1"  color="#4CC3D9"></a-box>
+
+      <a-entity id="model" position="-7.5 -2 7">
+        <a-collada-model position="0 0 4" rotation="0 125 0" scale="0.4 0.4 0.4"
+                         src="#book" ></a-collada-model>
+      </a-entity>
+
+      <!-- imgs: https://www.flickr.com/groups/equirectangular/pool/ -->
+      <a-sky color="#AAE" src="https://farm2.staticflickr.com/1601/24978068361_8358395dd8_o_d.jpg"></a-sky>
+
+      <a-entity position="0 0 6">
+        <a-camera>
+          <a-entity cursor="fuse: true; fuseTimeout: 500"
+                    position="0 0 -1"
+                    geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+                    material="color: black; shader: flat">
+
+          <a-animation begin="click" easing="ease-in" attribute="scale"
+                       fill="backwards" from="0.1 0.1 0.1" to="1 1 1"></a-animation>
+          <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale"
+                       fill="forwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+
+          </a-entity>
+        </a-camera>
+      </a-entity>
+    </a-scene>
+
+    <script>
+
+      const pv = document.querySelector('#page-view');
+      const lbox = document.querySelector('#left');
+      const rbox = document.querySelector('#right');
+
+      lbox.addEventListener('click', function () {
+        console.log('clicked left');
+        const nr = pv.getAttribute('src').substring(5);
+        const next = parseInt(nr) - 1
+        if(nr > 1 ) {
+          pv.setAttribute('src', '#page'+next);
+          console.log(pv.getAttribute('src'))
+        } else {
+          console.log('left end');
+        }
+      });
+
+      rbox.addEventListener('click', function () {
+        console.log('clicked right');
+        const nr = pv.getAttribute('src').substring(5);
+        const next = parseInt(nr) + 1
+        if(nr < 4 ) {
+          pv.setAttribute('src', '#page'+next);
+          console.log(pv.getAttribute('src'))
+        } else {
+          console.log('right end');
+        }
+
+      });
+
+    </script>
+
+  </body>
+</html>

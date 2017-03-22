@@ -1,0 +1,24 @@
+{
+  "name": "aframe-playground",
+  "version": "1.0.0",
+  "description": "Test aframe (https://aframe.io) for VR",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ubbo/aframe-playground.git"
+  },
+  "keywords": [
+    "vr",
+    "cardboard",
+    "webvr",
+    "aframe"
+  ],
+  "author": "Ubbo Veentjer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ubbo/aframe-playground/issues"
+  },
+  "homepage": "https://github.com/ubbo/aframe-playground#readme"
+}
